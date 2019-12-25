@@ -1,14 +1,15 @@
 import React from 'react';
 import logo from './logo.svg';
 import Header from './components/Header';
+import StudentList from './components/StudentList';
 import './App.css';
-import NavItem from './components/Header/NavItem';
 
 class App extends React.Component {
   render() {
     return ( 
       <div className = "app" >
         <Header />
+        <StudentList />
       </div>
     );
   }
