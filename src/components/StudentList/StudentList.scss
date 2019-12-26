@@ -1,11 +1,24 @@
 table{
     border-collapse: collapse;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    th, td {
+        width: 120px;
+        padding: 5px;
+    }
 
     th {
         border: 1px solid black;
+        text-transform: capitalize;
     }
 
     td {
         border: 1px solid black;
+    }
+
+    td:hover{
+        background: #7ed6df;
     }
 }

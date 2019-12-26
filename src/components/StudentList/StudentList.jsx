@@ -4,8 +4,8 @@ import StudentRow from './StudentRow';
 import './StudentList.scss'
 
 
-const tableHeads = Object.keys(students[0]);
-console.log(tableHeads);
+const tableHeads = [...Object.keys(students[0]), 'average', 'Rank'];
+
 
 class StudentList extends Component {
     render(){
