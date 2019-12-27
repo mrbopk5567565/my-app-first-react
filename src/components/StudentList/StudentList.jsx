@@ -4,7 +4,7 @@ import StudentRow from './StudentRow';
 import './StudentList.scss'
 
 
-const tableHeads = [...Object.keys(students[0]), 'average', 'Rank'];
+const tableHeads = [ 'Number' ,...Object.keys(students[0]), 'average', 'Rank'];
 
 
 class StudentList extends Component {
@@ -21,7 +21,7 @@ class StudentList extends Component {
                     </thead>
                     <tbody>
                         {students.map((student, idx) =>
-                            <StudentRow key={idx} { ... student }/>
+                            <StudentRow key={idx} number={idx} { ... student }/>
                         )}
                     </tbody>
                 </table>
