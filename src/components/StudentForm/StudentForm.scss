@@ -1,0 +1,54 @@
+*{
+    box-sizing: border-box;
+}
+
+.student-form{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 20px auto;
+}
+
+.form{
+    background: #c7ecee;
+    width: 500px;
+    padding: 30px 0;
+    border-radius: 15px;
+
+    &--title{
+        text-align: center;
+        font-weight: bold;
+        font-size: 20px;
+    }
+
+    &--item{
+        display: flex;
+        flex-wrap: wrap;
+        padding: 10px 30px;
+    }
+
+    &--lable{
+        padding-left: 15px;
+        text-align: left;
+        display: flex;
+        align-items: center;
+        width: 20%;
+    }
+
+    &--input{
+        padding: 10px 5px;
+        width: 70%;
+        border: 1px solid #c7ecee;
+        border-radius: 5px;
+    }
+}
+
+.button-insert{
+    font-size: 18px;
+    margin-top: 10px;
+    padding: 5px 10px;
+    background: #1abc9c;
+    color: white;
+    border: 1px solid #c7ecee;
+    border-radius: 5px;
+}
