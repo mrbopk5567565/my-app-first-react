@@ -3,6 +3,7 @@ import './StudentForm.scss';
 import StudentItem from './StudentItem';
 import lableData, { lable_ThayTung } from './lableData/lableData.js';
 import TextInput from '../Forms/TextInput';
+import { getDataFromLocalStorage, saveDataToLocalStorage } from '../../utils/common'
 
 
 class StudentForm extends Component {
@@ -13,8 +14,8 @@ class StudentForm extends Component {
             data: {
                 name: '',
                 gender: '',
-                math: 0,
-                english: 0
+                math: '',
+                english: '',
             }
         }
     }
@@ -44,24 +45,45 @@ class StudentForm extends Component {
     
         return(
             <div className="student-form">
-                {/* <TextInput name="name" lable="Student Name" onChange={ this.handleChange }/>
-                <TextInput name="name" lable="Student Name" onChange={ this.handleChange }/> */}
-                {lable_ThayTung.map((lable, idx) => 
-                    <TextInput
-                        key={idx}
-                        name={lable.name}
-                        lable={lable.lable}
-                        onChange={ this.handleChange }
-                    />
-                )}
+                <h2>Student Form</h2>
+                <div className="student-form-contend">
+                    {/* <TextInput name="name" lable="Student Name" onChange={ this.handleChange }/>
+                    <TextInput name="name" lable="Student Name" onChange={ this.handleChange }/> */}
+
+                    {lable_ThayTung.map((item, idx) => 
+                        <TextInput
+                            key={idx}
+                            name={item.name}
+                            lable={item.lable}
+                            onChange={ this.handleChange }
+                        />
+                    )}
+                </div>
+                <div className="student-form-buttons">
+                    <button onClick={ this.insertStudent }>Insert Students</button>
+                </div>
             </div>
         )
     }
 
     handleChange = e => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         const { data } = this.state;
+        // console.log('name of textput:',e.target.name)
+        data[e.target.name] = e.target.value;
+        // console.log('data:', data[e.target.name])
+        this.setState({ data })
+        console.log(data)
     }
+
+    insertStudent = () => {
+        const { students, updateStudentList } = this.props;
+        const data = getDataFromLocalStorage('students') || students;
+        const updateData = [ ...data, this.state.data ];
+        saveDataToLocalStorage('students', updateData);
+        updateStudentList(updateData)
+    }
+    
 }
 
 export default StudentForm;

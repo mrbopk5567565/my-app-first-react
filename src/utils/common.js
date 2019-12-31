@@ -9,7 +9,12 @@
 export function averegeCalc() {
     let sum = 0;
     for (let i = 0; i < arguments.length; i++) {
-        sum += arguments[i];
+        if (typeof arguments[i] === 'number') {
+            sum += arguments[i];
+        } else {
+            let x = parseInt(arguments[i]);
+            sum += x;
+        }
     }
     return sum / arguments.length;
 }
@@ -31,3 +36,7 @@ export function Rank(average){
     }
     return classify;
 }
+
+export const getDataFromLocalStorage = key => JSON.parse(localStorage.getItem(key))
+
+export const saveDataToLocalStorage = (key, data) => localStorage.setItem(key, JSON.stringify(data))

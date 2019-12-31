@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
-import students from './data/studentData';
+// import students from './data/studentData';
 import StudentRow from './StudentRow';
-import './StudentList.scss'
-
-
-const tableHeads = [ 'Number' ,...Object.keys(students[0]), 'average', 'Rank'];
-
+import './StudentList.scss';
 
 class StudentList extends Component {
     render(){
+
+        const { students } = this.props;
+        const tableHeads = [ 'Number' ,...Object.keys(students[0]), 'average', 'Rank'];
+
         return(
             <div className="student-list">
                 <table>
