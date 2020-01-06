@@ -40,3 +40,19 @@ export function Rank(average){
 export const getDataFromLocalStorage = key => JSON.parse(localStorage.getItem(key))
 
 export const saveDataToLocalStorage = (key, data) => localStorage.setItem(key, JSON.stringify(data))
+
+export const randomColor = () => {
+    const letters = '0123456789ABCDEF';
+    let color = '#';
+    // let color1 = '#';
+
+    for (let i = 0; i < 6; i++){
+        color += letters[Math.floor(Math.random() * 16)]
+        console.log('color test: ', color)     
+    }
+
+    // color1 = Math.floor(Math.random() * 16)
+    // console.log('color test1: ', color1)
+
+    return color;
+}

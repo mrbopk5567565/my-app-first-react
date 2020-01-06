@@ -1,36 +1,25 @@
 import React from 'react';
+import { BrowserRouter, Switch, Route} from 'react-router-dom';
 import Header from './components/Header';
-import StudentList from './components/StudentList';
-import StudentForm from './components/StudentForm';
-import ContentSection from './components/ContentSection';
-import students from './utils/data/studentData';
-import { getDataFromLocalStorage } from './utils/common';
+import Home from './pages/Home';
+import ColorfulTiles from './pages/ColorfulTiles';
+import NotFound from './pages/NotFound';
 
 import './App.scss';
 
 class App extends React.Component {
-  constructor(){
-    super();
-
-    this.state = {
-      stds: getDataFromLocalStorage('students') || students,
-    }
-  }
-  render() {
-      const { stds } = this.state;
+  
+  render() {      
     return ( 
       <div className = "app" >
-        <Header />
-        <div className="content">
-          <div className="content-section">
-            <StudentForm
-              updateStudentList = { data => this.setState({stds: data}) }
-              students = { stds }
-            />
-            <StudentList students={ stds } />
-          </div>
-          <ContentSection/>
-        </div>
+        <BrowserRouter>
+          <Header />
+          <Switch>
+            <Route exact path="/" component={ Home }/>
+            <Route path="/colorful-tiles" component={ ColorfulTiles }/>
+            <Route component={ NotFound }/>
+          </Switch>
+        </BrowserRouter>
       </div>
     );
   }

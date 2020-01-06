@@ -4,6 +4,10 @@ export default [
         url: '/',
     },
     {
+        lable: 'ColorFul Tiles',
+        url: '/colorful-tiles',
+    },
+    {
         lable: 'Student List',
         url: '/student-list',
     },

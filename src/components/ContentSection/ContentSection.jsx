@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import tabData from './data/tabData';
 import Tab from '../Tab';
 import TabContent from '../TabContent';
+import tabData from './data/tabData';
+
+import './ContentSection.scss';
 
 class ContentSection extends Component {
     constructor(){
@@ -16,22 +18,22 @@ class ContentSection extends Component {
         const { tabIdx } = this.state;
 
         return(
-            <div className="content-section content-section--tab">
+            <div className="content-section content-section--tabs">
                 <div className="tabs">
-                    { tabData.map((tab, idx) =>
+                    { tabData.map((tab, idx) => 
                         <Tab
                             key={ idx }
                             title={ tab.title }
                             active={ tabIdx === idx }
-                            onClick={ () => this.setState({ tabIdx: idx }) }
+                            onClick={ () => this.setState({ tabIdx: idx })}
                         />
-                    )}
+                    )}              
                 </div>
                 { tabData.map((tab, idx) =>
                     <TabContent
                         key={ idx }
-                        active={ tabIdx === idx }
                         content={ tab.content }
+                        active={ tabIdx === idx }
                     />
                 )}
             </div>

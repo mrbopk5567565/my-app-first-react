@@ -16,18 +16,18 @@ export default [
 export const lable_ThayTung = [
     {
         name: 'name',
-        lable: 'Student Name',
+        lable: 'Name',
     },
     {
         name: 'gender',
-        lable: 'Student Gender',
+        lable: 'Gender',
     },
     {
         name: 'math',
-        lable: 'Student Math',
+        lable: 'Math',
     },
     {
         name: 'english',
-        lable: 'Student English',
+        lable: 'English',
     },
 ]

@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
 class TabContent extends Component {
-    render(){
+  render(){
 
-        const { active, content } = this.props;
+    const { active, content } = this.props;
 
-        return(
-            <div className={ `tab-content ${ active ? 'active' : '' }` }>
-                { content }
-            </div>
-        )
-    }
+    return(
+      <div className={ `tab-content ${ active ? 'active' : ''}` }>
+        { content }
+      </div>
+    )
+  }
 }
 
 export default TabContent;

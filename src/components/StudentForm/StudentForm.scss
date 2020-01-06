@@ -4,7 +4,8 @@
 
 .student-form{
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    width: 30%;
     text-align: center;
     margin: 20px auto;
 }

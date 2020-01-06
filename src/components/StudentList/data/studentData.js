@@ -29,4 +29,10 @@ export default [
       math: 9,
       english: 8
     },
+    {
+      name: 'Tai',
+      gender: 'female',
+      math: 5,
+      english: 8
+    },
   ];

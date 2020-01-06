@@ -4,6 +4,7 @@ import StudentItem from './StudentItem';
 import lableData, { lable_ThayTung } from './lableData/lableData.js';
 import TextInput from '../Forms/TextInput';
 import { getDataFromLocalStorage, saveDataToLocalStorage } from '../../utils/common'
+import validator from '../../validations/studentFormValidation';
 
 
 class StudentForm extends Component {
@@ -16,7 +17,8 @@ class StudentForm extends Component {
                 gender: '',
                 math: '',
                 english: '',
-            }
+            },
+            errors: {},
         }
     }
     render(){
@@ -42,22 +44,30 @@ class StudentForm extends Component {
 
 
         // cua thay
+
+        const { errors, data: { name, gender, math, english } } = this.state;
     
         return(
             <div className="student-form">
                 <h2>Student Form</h2>
                 <div className="student-form-contend">
-                    {/* <TextInput name="name" lable="Student Name" onChange={ this.handleChange }/>
-                    <TextInput name="name" lable="Student Name" onChange={ this.handleChange }/> */}
+                    {/* <TextInput name="name" lable="Name" onChange={ this.handleChange }/>
+                    <TextInput name="name" lable="Name" onChange={ this.handleChange }/> */}
+                    <TextInput name="name" label="Name" value={ name } onChange={ this.handleChange } error={ errors.name } />
+                    <TextInput name="gender" label="Gender" value={ gender } onChange={ e => this.handleChange(e) } error={ errors.gender } />
+                    <TextInput name="math" label="Math" value={ math } onChange={ this.handleChange }  error={ errors.math } />
+                    <TextInput name="english" label="English" value={ english } onChange={ this.handleChange }  error={ errors.english } />
 
-                    {lable_ThayTung.map((item, idx) => 
+                    {/* {lable_ThayTung.map((item, idx) => 
                         <TextInput
                             key={idx}
                             name={item.name}
                             lable={item.lable}
+                            // value={ name }
                             onChange={ this.handleChange }
+                            error={ errors.name }
                         />
-                    )}
+                    )} */}
                 </div>
                 <div className="student-form-buttons">
                     <button onClick={ this.insertStudent }>Insert Students</button>
@@ -65,6 +75,10 @@ class StudentForm extends Component {
             </div>
         )
     }
+
+    // errorChange = (e) => {
+    //     errors.name
+    // }
 
     handleChange = e => {
         // console.log(e.target.value)
@@ -77,11 +91,18 @@ class StudentForm extends Component {
     }
 
     insertStudent = () => {
+        const { isValid, errors } = validator(this.state.data);
+
+        if (!isValid){
+            return this.setState({ errors })
+        }
+
         const { students, updateStudentList } = this.props;
         const data = getDataFromLocalStorage('students') || students;
         const updateData = [ ...data, this.state.data ];
         saveDataToLocalStorage('students', updateData);
         updateStudentList(updateData)
+        this.setState({ errors: {}, data: {} });
     }
     
 }
