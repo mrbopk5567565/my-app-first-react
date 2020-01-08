@@ -1,6 +1,27 @@
 .giphy {
   padding: 20px;
 
+  &-search {
+    input {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: 2px solid #3498db;
+      font-size: 16px;
+      font-family: monospace;
+    }
+
+    button {
+      padding: 5px 10px;
+      border: 2px solid #3498db;
+      border-radius: 5px;
+      margin-left: 10px;
+      background: #3498db;
+      color: white;
+      font-size: 16px;
+      font-family: monospace;
+    }
+  }
+
   &-list{
     display: flex;
     flex-wrap: wrap;
