@@ -5,15 +5,15 @@ import './GiphyItem.scss';
 class GiphyItem extends Component {
   render() {
 
-    const { img, title } = this.props;
+    const { img, title, id } = this.props;
 
     return (
-      <div className="giphy-item">
+      <Link to={ `/giphy-detail/${id}` } className="giphy-item">
         <div className="giphy-item__image">
           <img src={img} alt={title} />
         </div>
         <span className="giphy-item__title">{ title }</span>
-      </div>
+      </Link>
     )
   }
 }
