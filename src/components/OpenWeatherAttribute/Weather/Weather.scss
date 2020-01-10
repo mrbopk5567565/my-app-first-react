@@ -1,0 +1,20 @@
+.weather {
+  margin: 10px;
+  padding: 20px;
+  font-family: monospace;
+  
+  width: 300px;
+
+  span {
+    color: red;
+  }
+
+  &-content{
+    display: flex;
+    border-bottom: 1px solid gray;
+  }
+
+  &-description{
+    padding-left: 10px;
+  }
+}

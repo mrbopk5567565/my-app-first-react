@@ -12,6 +12,10 @@ export default [
         url: '/giphy',
     },
     {
+        lable: 'Open Weather',
+        url: '/open-weather',
+    },
+    {
         lable: 'Student List',
         url: '/student-list',
     },
