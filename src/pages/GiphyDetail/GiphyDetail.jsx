@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getDataFromLocalStorage } from '../../utils/common';
+import './GiphyDetail.scss';
 
 class GiphyDetail extends Component {
   constructor(){
@@ -16,8 +17,9 @@ class GiphyDetail extends Component {
   show = () => {
     const { dataGihpy } = this.state;
     const dataProps = this.props;
-    console.log('data',dataGihpy[0].id)
-    console.log('giphydetail',dataProps.match.params.id)
+    console.log('giphydetail',dataProps)
+    // console.log('data',dataGihpy[0].id)
+    // console.log('giphydetail',dataProps.match.params.id)
     // dataGihpy.forEach(item => {
     //   if (item.id === dataProps.match.params.id){
     //     console.log('ok')
@@ -43,25 +45,27 @@ class GiphyDetail extends Component {
   render(){
     
     const { dataGihpy, import_datetime, title, image } = this.state;
-    console.log(dataGihpy)
+    // console.log(dataGihpy)
     return(
-      <div>
-        { import_datetime && 
-        <div>
-          <div>Import datetime</div>
-          <div>{import_datetime}</div>
+      <div className="giphy-detail">
+        { title && 
+        <div className="giphy-detail--item">
+          <div className="giphy-detail--title">Title:</div>
+          <div className="giphy-detail--description">{title}</div>
         </div>
         } 
-        { title && 
-        <div>
-          <div>Title</div>
-          <div>{title}</div>
+        { import_datetime && 
+        <div className="giphy-detail--item">
+          <div className="giphy-detail--title">Import datetime:</div>
+          <div className="giphy-detail--description">{import_datetime}</div>
         </div>
         } 
         { image && 
-        <div>
-          <div>Image</div>
-          <div><img src={ image } alt="#"/></div>
+        <div className="giphy-detail--item">
+          <div className="giphy-detail--title">Image</div>
+          <div className="giphy-detail--description">
+            <img src={ image } alt="#"/>
+          </div>
         </div>
         } 
       </div>

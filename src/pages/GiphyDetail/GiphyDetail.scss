@@ -1,0 +1,25 @@
+.giphy-detail{
+  padding: 30px;
+  font-size: 16px;
+  letter-spacing: 1px;
+  font-family: monospace;
+
+  &--item{
+    display: flex;
+    flex-wrap: wrap;
+    margin: 10px 0;
+  }
+
+  &--title{
+    width: 20%;
+  }
+
+  &--description{
+    width: 80%;
+    padding-left: 5px;
+  }
+
+  img{
+    max-width: 100%;
+  }
+}

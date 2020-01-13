@@ -13,6 +13,7 @@ class Giphy extends Component {
       data: [],
       search: '',
       offset: 0,
+      loading: false,
     }
   }
 
@@ -20,7 +21,8 @@ class Giphy extends Component {
     this.fetchGiphy('https://api.giphy.com/v1/gifs/trending?limit=20')
   }
 
-  fetchGiphy = (url) => {
+  fetchGiphy = (url, more) => {
+    this.setState({ loading: true })
     const { data } = this.state
     fetch(`${url}&api_key=hsstdMEvSfHb4lwbfOFWPOmLD1yHHpqg`, {
       method: 'GET', // or 'PUT'
@@ -31,23 +33,28 @@ class Giphy extends Component {
       .then((response) => response.json())
       .then((res) => {
         console.log('Success:', res);
-        // this.setState({ data: res.data })
-        // save data on LocalStoreage
+        let offet = this.state.offset;
+        let data = res.data;
         
-        if (true) {
-          const a = this.state.data;
-          const b = res.data;
-          const data = [ ...a, ...b ];
-          console.log('data',data.length)
-          saveDataToLocalStorage('dataGiphy', this.state.data)
-          this.setState({
-            data: data
-          })
+        // save data on LocalStoreage        
+        if (more) {
+          const storedData = getDataFromLocalStorage('dataGiphy');
+          data = [ ...storedData, ...data ];
+          console.log('data', data.length)
+          offet = offet + 20;
         }
+        
+        this.setState({
+          data: data,
+          offet: offet
+        })
+        // saveDataToLocalStorage('dataGiphy', this.state.data)
+        saveDataToLocalStorage('dataGiphy', data)
       })
       .catch((error) => {
         console.error('Error:', error);
-      });
+      })
+      .finally(() => this.setState({ loading: false }))
   }
 
   onChange = (e) => {
@@ -64,15 +71,14 @@ class Giphy extends Component {
   }
 
   onLoadMore = () => {
-    const { offset } = this.state;
-    index_offset+=20;
-    console.log(index_offset)
-    const url = `https://api.giphy.com/v1/gifs/trending?limit=20&offset=${ index_offset }`;
-    this.fetchGiphy(url)
+    const offet = this.state.offset + 20;
+    console.log(offet)
+    const url = `https://api.giphy.com/v1/gifs/trending?limit=20&offset=${ offet }`;
+    this.fetchGiphy(url, true)
   }
 
   render() {
-    const { data } = this.state;
+    const { data, loading } = this.state;
     return (
       <div className="giphy">
         <div className="giphy-search">
@@ -90,8 +96,9 @@ class Giphy extends Component {
             />
           )}
         </div>
-        <button onClick={ this.onLoadMore }>Load more</button>
-
+        <div className="buttons">
+          { !loading && <button className="button" onClick={ this.onLoadMore }>Load more</button> }
+        </div>
       </div>
     )
   }
