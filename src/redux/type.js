@@ -1,1 +1,6 @@
 export const TEST_REDUX = 'TEST_REDUX';
+
+// Giphy
+export const GET_TRENDING_GIFS = 'GET_TRENDING_GIFS';
+export const GET_MORE_TRENDING_GIFS = 'GET_MORE_TRENDING_GIFS';
+export const GIPHY_LOADING = 'GIPHY_LOADING';
