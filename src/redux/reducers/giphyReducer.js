@@ -1,4 +1,4 @@
-import { GET_TRENDING_GIFS, GET_MORE_TRENDING_GIFS, GIPHY_LOADING } from '../type';
+import { GET_TRENDING_GIFS, GET_MORE_TRENDING_GIFS, GIPHY_LOADING, GIPHY_SEARCH } from '../type';
 
 const initialState = {
   trending: {
@@ -28,6 +28,11 @@ export default function(state = initialState, action){
       return {
         ...state,
         loading: true,
+      }
+    case GIPHY_SEARCH:
+      return {
+        ...state,
+        trending: action.payload
       }
     default:
       return state;

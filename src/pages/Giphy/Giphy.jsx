@@ -3,9 +3,17 @@ import GiphyItem from '../../components/GiphyItem';
 import './Giphy.scss';
 
 import { connect } from 'react-redux';
-import { getTrendingGifs, getMoreTrendingGifs } from '../../redux/actions/giphyActions';
+import { getTrendingGifs, getMoreTrendingGifs, giphySearch } from '../../redux/actions/giphyActions';
 
 class Giphy extends Component {
+  constructor(){
+    super();
+
+    this.state = {
+      search: undefined,
+    }
+  }
+
   onChange = (e) => {
     this.setState({
       [e.target.name]: e.target.value
@@ -18,12 +26,13 @@ class Giphy extends Component {
   }
 
   render() {
-    const { trendingGifs, loading, offset, getMoreTrendingGifs } = this.props;
+    const { trendingGifs, loading, offset, getMoreTrendingGifs, giphySearch } = this.props;
+    const { search } = this.state;
     return (
       <div className="giphy">
         <div className="giphy-search">
           <input type="text" name="search" onChange={ this.onChange }/>
-          <button onClick={ this.onSearch }>Search gifs</button>
+          <button onClick={ () => giphySearch(search) }>Search gifs</button>
         </div>
         <h1>Gif images</h1>
         { !!trendingGifs && 
@@ -52,4 +61,4 @@ const mapStateToProps = state => ({
   loading: state.giphy.loading,
 })
 
-export default connect(mapStateToProps, { getTrendingGifs, getMoreTrendingGifs })(Giphy);
+export default connect(mapStateToProps, { getTrendingGifs, getMoreTrendingGifs, giphySearch })(Giphy);
