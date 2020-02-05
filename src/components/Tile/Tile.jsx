@@ -1,37 +1,31 @@
 import React, { Component } from 'react';
-import { randomColor } from '../../utils/common';
+import { randomColor, defaultColor } from '../../utils/common';
+import { connect } from 'react-redux';
+import { updateTileColor } from '../../redux/actions/tileActions';
 import './Tile.scss';
 
-const defaultColor = '#ffffff';
+import { getDataFromLocalStorage, saveDataToLocalStorage } from '../../utils/common';
 
 class Tile extends Component {
-  constructor() {
-    super();
-
-    this.state = {
-      color: defaultColor
-    }
-  }
-
   updateColor = () => {
-    const { color } = this.state;
+    const { rowIdx, columnIdx, currentColor, updateTileColor, color } = this.props;
     let newColor = '';
 
-    if (color != defaultColor){
+    if (currentColor !== defaultColor){
       newColor = defaultColor;
     } else {
       newColor = randomColor();
     }
 
-    this.setState({ color: newColor })
+    updateTileColor({ rowIdx, columnIdx, newColor })
   }
 
   render() {
-    const { color } = this.state;
+    const { color } = this.props;
     return (
       <div
         className="tile"
-        onMouseMove={ this.updateColor }
+        // onMouseMove={ this.updateColor }
         onClick={ this.updateColor }
         style={{ backgroundColor: color }}
         >
@@ -40,4 +34,4 @@ class Tile extends Component {
   }
 }
 
-export default Tile;
+export default connect(null, { updateTileColor })(Tile);

@@ -56,3 +56,5 @@ export const randomColor = () => {
 
     return color;
 }
+
+export const defaultColor = '#ffffff';
