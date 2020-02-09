@@ -3,7 +3,7 @@ import TextInput from '../../../components/Forms/TextInput';
 import './GenerateForm.scss'
 
 import { connect } from 'react-redux';
-import { generateTiles } from '../../../redux/actions/tileActions';
+import { generateTiles, saveTiles, updateTileColor } from '../../../redux/actions/tileActions';
 
 import { getDataFromLocalStorage, saveDataToLocalStorage } from '../../../utils/common';
 
@@ -14,6 +14,7 @@ class GenerateForm extends Component {
     this.state = {
       row: 0,
       column: 0,
+      value_tile: '',
       data: getDataFromLocalStorage('Colorful__Tile') || ''
     }
   }
@@ -36,7 +37,7 @@ class GenerateForm extends Component {
   }
 
   saveTile = () => {
-    
+    this.props.saveTiles(this.props.tiles, this.state.value_tile)
   }
 
   openHistory = (item) => {
@@ -51,7 +52,9 @@ class GenerateForm extends Component {
   }
 
   render() {
-    const { row, column, data } = this.state;
+    const { row, column } = this.state;
+    const { saveData } = this.props;
+
     return (
       <div className="generate-form">
         <TextInput name="row" label="Row" value={row} onChange={this.onChange} />
@@ -60,10 +63,11 @@ class GenerateForm extends Component {
           <button className="button" onClick={this.onGenerate}>Generate</button>
           <button className="button button--grey" onClick={ this.setAllToDefault }>Set all to default</button>
           <button className="button" onClick={this.saveTile}>Save</button>
+          <input name="value_tile" onChange={this.onChange}></input>
         </div>
         <div className="generate-form__history">
-          {!!data && data.map((item, idx) =>
-            <button key={idx} onClick={() => this.openHistory(item)}>{`data ${item[0].row} x ${item[0].column}`}</button>
+          {!!saveData && saveData.map((item, idx) =>
+            <button key={idx} onClick={() => this.openHistory(item)}>{item.name}</button>
           )}
         </div>
       </div>
@@ -73,7 +77,8 @@ class GenerateForm extends Component {
 
 const mapStateToProps = state => ({
   tiles: state.tile.data,
+  saveData: state.tile.saveData,
 })
 
-export default connect(null, { generateTiles })(GenerateForm);
+export default connect(mapStateToProps, { generateTiles, saveTiles, updateTileColor })(GenerateForm);
 // export default (GenerateForm);

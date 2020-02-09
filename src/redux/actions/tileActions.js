@@ -24,10 +24,11 @@ export const updateTileColor = (data) => dispatch => {
   })
 }
 
-export const saveTiles = (data) => dispatch => {
-  const saveData = { data }
+export const saveTiles = (data, name) => dispatch => {
+  // const saveData = { ...data }
   dispatch({
     type: SAVE_TILES,
-    payload: saveData,
+    payload: data,
+    name: name,
   })
 }
