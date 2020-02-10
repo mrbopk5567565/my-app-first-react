@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import TextInput from '../../../components/Forms/TextInput';
+import Tile from '../../../components/Tile'
 import './GenerateForm.scss'
 
 import { connect } from 'react-redux';
@@ -15,6 +16,8 @@ class GenerateForm extends Component {
       row: 0,
       column: 0,
       value_tile: '',
+      isShow: false,
+      show_tile: false,
       data: getDataFromLocalStorage('Colorful__Tile') || ''
     }
   }
@@ -38,21 +41,23 @@ class GenerateForm extends Component {
 
   saveTile = () => {
     this.props.saveTiles(this.props.tiles, this.state.value_tile)
+    this.setState({
+      value_tile: ''
+    })
   }
 
   openHistory = (item) => {
-    console.log('asd', item)
-    const a = {
-      row: item[0].row,
-      column: item[0].column,
+    const { isShow } = this.state;
+    if (isShow) {
+      this.setState({ show_tile: false });
+    } else {
+      this.setState({ show_tile: true });
     }
-    const b = item[1]
-    console.log('acasc', b)
-    this.props.generateTiles( a )
+    this.setState({ isShow: !isShow})
   }
 
   render() {
-    const { row, column } = this.state;
+    const { row, column, show_tile } = this.state;
     const { saveData } = this.props;
 
     return (
@@ -67,7 +72,23 @@ class GenerateForm extends Component {
         </div>
         <div className="generate-form__history">
           {!!saveData && saveData.map((item, idx) =>
-            <button key={idx} onClick={() => this.openHistory(item)}>{item.name}</button>
+            <div key={idx} className="item-file">
+              <button  onClick={() => this.openHistory(item)}>{item.name}</button>
+              {!!show_tile &&
+                <div className="load-tile">
+                  {item.save.map((row, rowIdx) =>
+                    <div key={ rowIdx } className="tile-row">
+                      { row.map((tile, columnIdx) =>
+                        <Tile
+                          key={ columnIdx }
+                          color={ tile }
+                        />
+                      )}
+                    </div>
+                  )}
+                </div>              
+              }
+            </div>
           )}
         </div>
       </div>
