@@ -3,7 +3,20 @@
 
   .button {
     margin: 20px 10px 20px 0;
+    padding: 10px 10px;
     text-transform: uppercase;
+    border-radius: 5px;
+  }
+
+  .button:hover{    
+    background: darkcyan;
+    color: white;
+    transition: 0.5s;
+  }
+
+  .generate-form__buttons input{
+    border-radius: 5px;
+    padding: 10px 10px;
   }
 }
 

@@ -68,12 +68,12 @@ class GenerateForm extends Component {
           <button className="button" onClick={this.onGenerate}>Generate</button>
           <button className="button button--grey" onClick={ this.setAllToDefault }>Set all to default</button>
           <button className="button" onClick={this.saveTile}>Save</button>
-          <input name="value_tile" onChange={this.onChange}></input>
+          <input name="value_tile" onChange={this.onChange} placeholder="name file ..."></input>
         </div>
         <div className="generate-form__history">
           {!!saveData && saveData.map((item, idx) =>
             <div key={idx} className="item-file">
-              <button  onClick={() => this.openHistory(item)}>{item.name}</button>
+              <button className="button" onClick={() => this.openHistory(item)}>{item.name}</button>
               {!!show_tile &&
                 <div className="load-tile">
                   {item.save.map((row, rowIdx) =>
